@@ -1,6 +1,10 @@
+# ignore package managers
 vendor
+node_modules
+# remove directories
 public_html/wp-admin
+public_html/wp-includes
 public_html/wp-content/uploads
 public_html/wp-content/plugins
 public_html/wp-content/themes
-node_modules
+
