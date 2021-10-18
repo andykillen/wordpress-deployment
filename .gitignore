@@ -1,30 +1,32 @@
 # ignore package managers
-vendor
 node_modules
-# remove directories
+vendor
+# wordpress directories
 public_html/wp-admin
 public_html/wp-includes
-public_html/wp-content/uploads
-public_html/wp-content/plugins
 public_html/wp-content/themes
-# remove root directory files
-public_html/readme.html
-public_html/wp-config-sample.php
-public_html/wp-load.php
-public_html/wp-trackback.php
-public_html/wp-activate.php
-public_html/wp-login.php
-public_html/xmlrpc.php
-public_html/wp-admin
-public_html/wp-cron.php
-public_html/wp-mail.php
-public_html/wp-blog-header.php
-public_html/wp-settings.php
-public_html/license.txt
-public_html/wp-comments-post.php
-public_html/wp-links-opml.php
-public_html/wp-signup.php
-public_html/index.php
+public_html/wp-content/plugins
+public_html/wp-content/uploads
+# WordPress root directory items installed by composer
 public_html/composer.json
-# settings file 
+public_html/index.php
+public_html/license.txt
+public_html/readme.html
+public_html/wp-activate.php
+public_html/wp-admin
+public_html/wp-blog-header.php
+public_html/wp-comments-post.php
+public_html/wp-config-sample.php
+public_html/wp-content
+public_html/wp-cron.php
+public_html/wp-includes
+public_html/wp-links-opml.php
+public_html/wp-load.php
+public_html/wp-login.php
+public_html/wp-mail.php
+public_html/wp-settings.php
+public_html/wp-signup.php
+public_html/wp-trackback.php
+public_html/xmlrpc.php
+# settings file
 settings.php

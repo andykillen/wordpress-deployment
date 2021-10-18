@@ -1,14 +1,12 @@
 {
-    "name": "files-generator",
+    "name": "gitignore-file-generator",
     "version": "1.0.0",
     "description": "Generates the .gitignore",
     "dependencies": {
-        "fs": "*",
-        "os": "*",
-        "path": "*"
+        "fs": "*"
     },
     "scripts": {
         "custom": "node ./scripts/Node/custom.js",
-        "contrib": "node ./scripts/Node/contrib.js"        
+        "org": "node ./scripts/Node/contrib.js"        
     }
 }

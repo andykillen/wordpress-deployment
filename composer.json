@@ -5,40 +5,46 @@
 		"wordpress",
 		"cms",
 		"composer",
-		"deployment"
+		"deployment",
+		"htaccess",
+		"robots.txt"
 	],
 	"require": {
 		"composer/composer": "*",
         "composer/installers": "^2.0",
-		"johnpbloch/wordpress": "5.8.1",
+		"johnpbloch/wordpress": "*",
 		"wpackagist-plugin/akismet":"*",
-		"wpackagist-theme/twentytwenty":"^1.8",
+		"wpackagist-theme/twentytwenty":"*",
 		"wpackagist-plugin/mailgun":"*",
 		"wpackagist-plugin/wordpress-seo":"*",
-		"wpackagist-plugin/woocommerce": "^5.8"
+		"wpackagist-plugin/woocommerce": "*",
+		"cweagans/composer-patches": "^1.7"
 	},
 	"extra": {
-	        "installer-paths": {
-	            "public_html/wp-content/plugins/{$name}/": [
-	                "type:wordpress-plugin"
-	            ],
-	            "public_html/wp-content/themes/{$name}/": [
-	                "type:wordpress-theme"
-	            ]
-	        },
-	        "wordpress-install-dir": "public_html",
-			"wordpress-type" : "single",
-			"server-type" : "apache"
+		"composer-exit-on-patch-failure": true,
+		"patches-file": "composer.patches.json",
+		"enable-patching": true,
+		"installer-paths": {
+			"public_html/wp-content/plugins/{$name}/": [
+				"type:wordpress-plugin"
+			],
+			"public_html/wp-content/themes/{$name}/": [
+				"type:wordpress-theme"
+			]
+		},
+		"wordpress-install-dir": "public_html",
+		"wordpress-type" : "single",
+		"server-type" : "apache"
 	},
 	"repositories": {
-	      "wpackagist":  {
-	            "type": "composer",
-	            "url": "https://wpackagist.org",
-			 	"only": [
-		                "wpackagist-plugin/*",
-		                "wpackagist-theme/*"
-		            ]
-	        }
+		"wpackagist":  {
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+					"wpackagist-plugin/*",
+					"wpackagist-theme/*"
+				]
+		}
 	},
 	"autoload": {
         "classmap": [
