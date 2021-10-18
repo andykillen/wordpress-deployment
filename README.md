@@ -1,0 +1,2 @@
+# WordPress deployments via composer
+

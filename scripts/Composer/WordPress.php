@@ -56,8 +56,7 @@ class WordPress {
     } else {
       $wordpress_type = 'single';
     }
-    echo $vendor_dir;
-
+    
     $wordpress_dir = str_replace('vendor', $web_root, $vendor_dir);
 
     $events_dir = str_replace('vendor','events', $vendor_dir);
@@ -69,10 +68,10 @@ class WordPress {
       if( file_exists($try_file . $filetype) ) {
         
          switch($filetype){
-           case '.php':
-              require($try_file . $filetype);
+            case '.php':
+              require_once($try_file . $filetype);
             break;
-            default:
+            case '.sh':
               $command = "{$try_file}{$filetype}  {$wordpress_dir} {$wordpress_type} {$server}";
               shell_exec($command);
             break;
