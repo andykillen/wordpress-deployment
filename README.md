@@ -9,7 +9,7 @@ The big question to answer is, why use this and not directly John P Bloch excell
 - optional settings.php pre-ignored in the root if you want to use it. 
 
 ## Most basic usage
-### setup WordPress
+### Setup WordPress
 ```
 // clone the repo using SSH
 git clone git@github.com:andykillen/wordpress-deployment.git
@@ -118,4 +118,55 @@ git clone git@github.com:andykillen/wordpress-deployment.git .
 git remote set-url origin git@github.com:yourname/site-deployment-name.git
 ```
 
-** don't forget to delete the .git directory or change to your repo**
+**don't forget to delete the .git directory or change to your repo**
+
+## Composer Options
+
+### Add new themes or plugins via composer
+
+Either hand edit the require section to add your wanted theme or plugin.  
+```
+"require": {
+		"cweagans/composer-patches": "^1.7",
+		"composer/composer": "*",
+		"composer/installers": "^2.0",
+		"johnpbloch/wordpress": "*",
+		"wpackagist-plugin/akismet":"*",
+		"wpackagist-theme/twentytwenty":"*"	
+	}
+```
+### Adaptions to EXTRA
+
+```
+"extra": {
+		"composer-exit-on-patch-failure": true,
+		"patches-file": "composer.patches.json",
+		"enable-patching": true,
+		"installer-paths": {
+			"public_html/wp-content/plugins/{$name}/": [
+				"type:wordpress-plugin"
+			],
+			"public_html/wp-content/themes/{$name}/": [
+				"type:wordpress-theme"
+			]
+		},
+		"wordpress-install-dir": "public_html",
+		"wordpress-type" : "single",
+		"server-type" : "apache"
+	},
+```
+#### Adapt the WordPress server directory
+
+In the extra section, wherever you see ```public_html``` change it to be the directory name you want. There are 3 places.
+
+#### Change the WordPress type 
+Adapt the ```wordpress-type``` value to be one of the following
+
+- single
+- subdirectory
+- subdomain
+
+This will auto add the default WordPress .htaccess (if apache based) for that type of install into the webroot.
+
+#### Change the Server Type
+Change the ```server-type``` away from being apache, to anything you like, and it will not try to copy the .htaccess to the root of the server.

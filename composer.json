@@ -10,12 +10,12 @@
 		"robots.txt"
 	],
 	"require": {
+		"cweagans/composer-patches": "^1.7",
 		"composer/composer": "*",
 		"composer/installers": "^2.0",
 		"johnpbloch/wordpress": "*",
 		"wpackagist-plugin/akismet":"*",
-		"wpackagist-theme/twentytwenty":"*",
-		"cweagans/composer-patches": "^1.7"
+		"wpackagist-theme/twentytwenty":"*"	
 	},
 	"extra": {
 		"composer-exit-on-patch-failure": true,
@@ -56,5 +56,4 @@
             "Deployments\\Composer\\WordPress::postPackageUpdate"
         ]
     }
-
 }
