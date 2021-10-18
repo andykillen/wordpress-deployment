@@ -1,0 +1,55 @@
+{
+	"name": "andykillen/wordpress-deployment",
+	"description": "Deploy Wordpress via composer with extra tools to make it easuer.",
+	"keywords": [
+		"wordpress",
+		"cms",
+		"composer",
+		"deployment"
+	],
+	"require": {
+		"composer/composer": "*",
+        "composer/installers": "^2.0",
+		"johnpbloch/wordpress": "5.8.1",
+		"wpackagist-plugin/akismet":"*",
+		"wpackagist-theme/twentytwenty":"^1.8",
+		"wpackagist-plugin/mailgun":"*",
+		"wpackagist-plugin/wordpress-seo":"*",
+		"wpackagist-plugin/woocommerce": "^5.8"
+	},
+	"extra": {
+	        "installer-paths": {
+	            "public_html/wp-content/plugins/{$name}/": [
+	                "type:wordpress-plugin"
+	            ],
+	            "public_html/wp-content/themes/{$name}/": [
+	                "type:wordpress-theme"
+	            ]
+	        },
+	        "wordpress-install-dir": "public_html"
+	},
+	"repositories": {
+	      "wpackagist":  {
+	            "type": "composer",
+	            "url": "https://wpackagist.org",
+			 	"only": [
+		                "wpackagist-plugin/*",
+		                "wpackagist-theme/*"
+		            ]
+	        }
+	},
+	"autoload": {
+        "classmap": [
+            "scripts/Composer/WordPress.php"
+        ]
+	},
+	"scripts": {
+        "post-package-install": [
+            "Deployments\\Composer\\WordPress::postPackageInstall"
+        ],
+        "post-package-update": [
+            "Deployments\\Composer\\WordPress::postPackageUpdate"
+        ]
+    }
+
+}

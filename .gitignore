@@ -1,0 +1,6 @@
+vendor
+public_html/wp-admin
+public_html/wp-content/uploads
+public_html/wp-content/plugins
+public_html/wp-content/themes
+node_modules
