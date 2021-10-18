@@ -14,7 +14,7 @@ if [ "$SERVER_TYPE" == "apache" ]; then
         cp "$PROJECT_ROOT_DIRECTORY/files/htaccess-$WORDPRESS_TYPE.txt" "$WORKING_DIRECTORY/.htaccess"
     fi    
 fi
-
+# check for robots.txt, create if it does not exist
 if [ ! -f "$WORKING_DIRECTORY/robots.txt" ]; then
         cp "$PROJECT_ROOT_DIRECTORY/files/robots.txt" "$WORKING_DIRECTORY/robots.txt"
 fi

@@ -11,13 +11,10 @@
 	],
 	"require": {
 		"composer/composer": "*",
-        "composer/installers": "^2.0",
+		"composer/installers": "^2.0",
 		"johnpbloch/wordpress": "*",
 		"wpackagist-plugin/akismet":"*",
 		"wpackagist-theme/twentytwenty":"*",
-		"wpackagist-plugin/mailgun":"*",
-		"wpackagist-plugin/wordpress-seo":"*",
-		"wpackagist-plugin/woocommerce": "*",
 		"cweagans/composer-patches": "^1.7"
 	},
 	"extra": {

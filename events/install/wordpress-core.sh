@@ -1,5 +1,5 @@
 #!/bin/bash
-# get the working directory from the first argument
+# Get the working directory from the first argument ( $2 is wordpress install type, $3 server type )
 WORKING_DIRECTORY=$1
 # change to doc root of the server (working directory)
 cd $WORKING_DIRECTORY

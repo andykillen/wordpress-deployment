@@ -1,6 +1,6 @@
 #!/bin/bash
-echo "I am now updating" > test.txt
-# get the working directory from the first argument
+
+# Get the working directory from the first argument ( $2 is wordpress install type, $3 server type )
 WORKING_DIRECTORY=$1
 
 echo $WORKING_DIRECTORY
