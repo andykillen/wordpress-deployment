@@ -26,7 +26,9 @@
 	                "type:wordpress-theme"
 	            ]
 	        },
-	        "wordpress-install-dir": "public_html"
+	        "wordpress-install-dir": "public_html",
+			"wordpress-type" : "single",
+			"server-type" : "apache"
 	},
 	"repositories": {
 	      "wpackagist":  {

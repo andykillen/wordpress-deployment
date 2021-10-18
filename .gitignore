@@ -26,4 +26,5 @@ public_html/wp-links-opml.php
 public_html/wp-signup.php
 public_html/index.php
 public_html/composer.json
-
+# settings file 
+settings.php

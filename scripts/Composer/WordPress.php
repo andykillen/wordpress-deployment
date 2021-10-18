@@ -41,7 +41,22 @@ class WordPress {
     
     $vendor_dir = $event->getComposer()->getConfig()->get('vendor-dir');
 
-    $web_root = $event->getComposer()->getPackage()->getExtra()['wordpress-install-dir'];
+    $extra = $event->getComposer()->getPackage()->getExtra();
+
+    $web_root = $extra['wordpress-install-dir'];
+
+    if(isset($extra['server-type'])) {
+      $server = $extra['server-type'];
+    } else {
+      $server = 'apache';
+    }
+
+    if(isset($extra['wordpress-type'])) {
+      $wordpress_type = $extra['wordpress-type'];
+    } else {
+      $wordpress_type = 'single';
+    }
+    echo $vendor_dir;
 
     $wordpress_dir = str_replace('vendor', $web_root, $vendor_dir);
 
@@ -50,19 +65,23 @@ class WordPress {
     $try_file = "$events_dir/$event_type/$packageName";
     
     foreach( self::$loadable as $filetype) {
-      if( file_exists($try_file . $filetype) ) {      
+
+      if( file_exists($try_file . $filetype) ) {
+        
          switch($filetype){
            case '.php':
               require($try_file . $filetype);
             break;
             default:
-              $command = "{$try_file}{$filetype}  {$wordpress_dir}";
+              $command = "{$try_file}{$filetype}  {$wordpress_dir} {$wordpress_type} {$server}";
               shell_exec($command);
             break;
          }
+
       }
+
     }
-    
+
   }
 
 }
