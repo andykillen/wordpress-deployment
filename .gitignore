@@ -24,4 +24,6 @@ public_html/license.txt
 public_html/wp-comments-post.php
 public_html/wp-links-opml.php
 public_html/wp-signup.php
+public_html/index.php
+public_html/composer.json
 
