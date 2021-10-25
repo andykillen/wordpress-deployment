@@ -9,7 +9,24 @@ The big question to answer is, why use this and not directly John P Bloch excell
 - optional settings.php pre-ignored in the root if you want to use it. 
 
 ## Most basic usage
-### Setup WordPress
+There are 2 ways to install this, either create a project, or clone the repo.  Its your choice, but creating the project is slightly less to do. 
+
+### Setup WordPress via Composer crete project
+```
+// create the project
+composer create-project andykillen/wordpress-deployment project-directory-name
+// change to the directory
+cd project-directory-name
+// install composer dependencies
+composer install
+// change to web root
+cd public_html
+// Get your web server working directory
+pwd
+```
+
+
+### Setup WordPress via Git Clone
 ```
 // clone the repo using SSH
 git clone git@github.com:andykillen/wordpress-deployment.git
@@ -170,3 +187,98 @@ This will auto add the default WordPress .htaccess (if apache based) for that ty
 
 #### Change the Server Type
 Change the ```server-type``` away from being apache, to anything you like, and it will not try to copy the .htaccess to the root of the server.
+
+
+## Post install scripts
+
+### Post composer install/update
+After every install of every composer item [theme, plugin, core], the composer scripts will look into the directory 
+```/events/install``` or ```/events/update``` for a bash script or a php script with the corresponding name that matches the name of the item installed. 
+
+If its a Bash script (.sh) file found, it will try to run it with three arguments on the command line. 
+```
+./script-being-run.sh [/absolute/path/to/server] [wordpress-type] [server-type]
+```
+Most scripts will only ever use the first argument. 
+
+If its a php file that is found, it will ```require()``` it, thus giving you scope to do whatever you want with php. 
+
+**note** : after installing or updating WordPress core, it will try to run ``` wp core update-db ``` so that the db schema is up to date, this will only work if you have WP CLI installed.
+
+### Patching
+There are many times that you find a problem with an item [plugin, theme, core] where it does not perform as expected.  So like the good person you are, you create a fork on git up and a Pull Request, or perhaps sumbit a track ticket
+with the fix included. BUT..... after many months your fix is still not inclueded, and you fear you will have to update the codebase by hand after every install..... Well, you don't have to.
+
+Here is an example. I created this [pull request/commit](https://github.com/alordiel/dropdown-multisite-selector/pull/14/commits/8cd1bb018a4d0a2bbc7b2b88770f3e795adc128a) for the plugin "dropdown-multisite-selector", because the apply filters did not actually save the output to a varable that could be used. 
+
+Its now October 2021, and I made this pull request in June 2021. 
+
+Its super simple to apply this patch after every time this plugin is installed by editing the composer.patches.json file and adding the relevent wp packigest info, and the link to the commit with the extension of .patch at the end
+
+```
+{
+    "patches": {
+ 	"wpackagist-plugin/dropdown-multisite-selector" : "https://github.com/alordiel/dropdown-multisite-selector/pull/14/commits/8cd1bb018a4d0a2bbc7b2b88770f3e795adc128a.patch"
+    }
+}
+```
+
+Alternatively you can create your own DIFF of code and keep it locally in the patches directory and reference it as a file not a url.  
+
+The good news is, if the person who owns the codebase finally updates to include your code, the patch will fail gracefully and not be applied. The bad news is, if they change other code that changes the row numbers, this will break the patch. But if you keep the code base version number locked, this will never be an issue that you can't test first before deployment to production. 
+
+### Robots.txt
+
+In the ```/files``` directory, there is a robots.txt file that will automatically be copied into the webroot on ```composer install```, you can edit this to have things like your sitemap directive if you want to use this in your CI/CD deployments. If this means nothing to you, just know this is a standard robots.txt file that tells search engines and other bots what they should and should not look at. 
+**note**: This will not overwite an existing robots.txt if there is one there. 
+
+### .htaccess
+In the ```/files``` directory, there is a number of different .htaccess files. These will automatically copy the correct htaccess for your server type and WordPress install type, as defined in the composer.json.  If you are not running an apache server (as defined in the composer.json) it will not copy anything.  These htaccess copies in the files directory are named based on your purpose [single, (multisute)subdirectory, (multisite)subdomain].  
+**note**: This will not overwrite an existing .htaccess if there is one there, and if your server is listed as not being of type apache it will not even attempt anything
+
+## Developer/Release tools
+
+### Generating a .gitignore
+There is a pair of command line tools that will automattically create a .gitignore file for you.  
+
+#### When you are only running themes or plugins that are available on WordPress.org
+This will exclude the entire /wp-content/plugins, /wp-content/themes, /wp-content/uploads, /wp-adming, /wp-includes  directories and the root directory files.
+```
+npm run org
+```
+#### When you have premium plugins or self created themes or plugins
+Very similar to above, except it checks for the composer installed plugins or themes and specifically names them, so that for example
+
+/wp-content/plugins/akismet
+/wp-content/themes/twentytwenty
+
+are added to the .gitignore, but your premium plugins or themes, or anything else **not** listed as a dependency in the composer.json is not added to the .gitignore file
+
+```
+npm run custom
+```
+
+These have been created as a startpoint for those that use git and want to build the codebase on the server rather than have everything in the repo.
+
+It if ofter necessary for premium plugins to be in the repo rather than composer, so that they can be updated properly. 
+
+You might want to add extra directories to this .gitignore, such as /wp-content/cache, just go for it.  These tools are here to help you create the first .gitignore, and as destructive in nature, so if you run them again they will overwrite things that were there before.
+
+**note** : Both scripts add a file called settings.php to the .gitignore
+
+### Suggestion on wp-config.php
+
+I really recommend that when you create the wp-config.php you put it a directory above the web root. I personally use a settings.php file in the root of the project to hold all the db info.  This makes it easy for many developers to work on the same project with differing credentials. 
+
+All you need to do is something like this in the wp-config.php
+
+```
+if(file_exists('settings.php'){
+    require 'settings.php';
+} else {
+
+// standard WordPress credentials as a fallback
+}
+```
+
+

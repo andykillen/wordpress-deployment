@@ -1,6 +1,16 @@
 {
 	"name": "andykillen/wordpress-deployment",
-	"description": "Deploy Wordpress via composer with extra tools to make it easuer.",
+	"description": "Deploy Wordpress via composer with extra tools to make it easier.",
+	"homepage" : "https://github.com/andykillen/wordpress-deployment",
+	"license" : "GPLv3",
+	"authors" : [
+		{
+			"name" : "Andrew Killen",
+			"email" : "andrew@bas-works.com",
+			"homepage" : "https://grok.codes",
+			"role" : "Developer"
+		}
+	]
 	"keywords": [
 		"wordpress",
 		"cms",
