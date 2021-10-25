@@ -1,6 +1,7 @@
 {
 	"name": "andykillen/wordpress-deployment",
 	"description": "Deploy Wordpress via composer with extra tools to make it easier.",
+	"type" : "project",
 	"homepage" : "https://github.com/andykillen/wordpress-deployment",
 	"license" : "GPL-3.0-or-later",
 	"authors" : [
@@ -11,6 +12,8 @@
 			"role" : "Developer"
 		}
 	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
 	"keywords": [
 		"wordpress",
 		"cms",
@@ -43,7 +46,9 @@
 		"wordpress-type" : "single",
 		"server-type" : "apache"
 	},
-	"repositories": {
+	"repositories": 
+		[
+		{
 		"wpackagist":  {
 			"type": "composer",
 			"url": "https://wpackagist.org",
@@ -51,8 +56,14 @@
 					"wpackagist-plugin/*",
 					"wpackagist-theme/*"
 				]
-		}
-	},
+			}
+		},
+		{
+	            "type": "vcs",
+	            "url": "https://github.com/andykillen/wordpress-deployment"
+	        }
+
+	],
 	"autoload": {
         "classmap": [
             "scripts/Composer/WordPress.php"
