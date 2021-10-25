@@ -2,7 +2,7 @@
 	"name": "andykillen/wordpress-deployment",
 	"description": "Deploy Wordpress via composer with extra tools to make it easier.",
 	"homepage" : "https://github.com/andykillen/wordpress-deployment",
-	"license" : "GPLv3",
+	"license" : "GPL-3.0-or-later",
 	"authors" : [
 		{
 			"name" : "Andrew Killen",
@@ -10,7 +10,7 @@
 			"homepage" : "https://grok.codes",
 			"role" : "Developer"
 		}
-	]
+	],
 	"keywords": [
 		"wordpress",
 		"cms",
@@ -21,11 +21,11 @@
 	],
 	"require": {
 		"cweagans/composer-patches": "^1.7",
-		"composer/composer": "*",
+		"composer/composer": "^2.1.8",
 		"composer/installers": "^2.0",
-		"johnpbloch/wordpress": "*",
-		"wpackagist-plugin/akismet":"*",
-		"wpackagist-theme/twentytwenty":"*"	
+		"johnpbloch/wordpress": "^5.8.1",
+		"wpackagist-plugin/akismet":"^4.2.1",
+		"wpackagist-theme/twentytwenty":"^1.8"
 	},
 	"extra": {
 		"composer-exit-on-patch-failure": true,
