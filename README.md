@@ -199,12 +199,16 @@ Here is an example. I created this [pull request/commit](https://github.com/alor
 
 Its now October 2021, and I made this pull request in June 2021. 
 
-Its super simple to apply this patch after every time this plugin is installed by editing the composer.patches.json file and adding the relevent wp packigest info, and the link to the commit with the extension of .patch at the end
+Its super simple to apply this patch after every time this plugin is installed by editing the composer.patches.json file and adding the relevent wp packigest info, and the link to the commit with the extension of .patch at the end.
+
+I've named the patch "Fix apply filters" so that I can later easily remove it when they finally add my PR. This means that its possible to have many patches per plugin or theme, or even for the core. 
 
 ```
 {
     "patches": {
- 	"wpackagist-plugin/dropdown-multisite-selector" : "https://github.com/alordiel/dropdown-multisite-selector/pull/14/commits/8cd1bb018a4d0a2bbc7b2b88770f3e795adc128a.patch"
+ 	"wpackagist-plugin/dropdown-multisite-selector" : {
+            "Fix apply filters" : "https://github.com/alordiel/dropdown-multisite-selector/pull/14/commits/8cd1bb018a4d0a2bbc7b2b88770f3e795adc128a.patch"     
+         } 
     }
 }
 ```
