@@ -9,7 +9,7 @@ The big question to answer is, why use this and not directly John P Bloch excell
 - optional settings.php pre-ignored in the root if you want to use it. 
 
 ## Most basic usage
-There are 2 ways to install this, either create a project, or clone the repo.  Its your choice, but creating the project is slightly less to do. 
+There are 2 ways to install this, either create a project, or clone the repo.  Its your choice, but creating the project is a much better option, because it auto installs everything.
 
 ### Setup WordPress via Composer crete project
 ```
@@ -17,8 +17,6 @@ There are 2 ways to install this, either create a project, or clone the repo.  I
 composer create-project andykillen/wordpress-deployment project-directory-name
 // change to the directory
 cd project-directory-name
-// install composer dependencies
-composer install
 // change to web root
 cd public_html
 // Get your web server working directory
@@ -27,6 +25,8 @@ pwd
 
 
 ### Setup WordPress via Git Clone
+Its not the recommended method as you have to do way more
+
 ```
 // clone the repo using SSH
 git clone git@github.com:andykillen/wordpress-deployment.git
@@ -38,6 +38,8 @@ cd wordpress-deployment
 rm -rf .git
 // run composer to load the most up to date version of everything
 composer update
+// install npm and select .gitignore generation
+composer run-script postInstall
 // change to the server doc root
 cd public_html
 // find out where you are so you can use this next for the server
@@ -115,28 +117,6 @@ Now that your server of choice is enabled, and the virtual host his pointing at 
 browser and go to the server and setup WordPress as normal. 
 
 If you want, you can put the wp-config.php in the public_html directory, or one directory above to add a little security. 
-
-## Git options
-
-### Named server directory
-Create the webserver directory with the name of the site. Whatever you put at the end will be the name of the directory that will be created
-```
-git clone git@github.com:andykillen/wordpress-deployment.git nameofsite.com
-```
-
-### Current empty directory
-Clone in to the current **empty** directory
-```
-git clone git@github.com:andykillen/wordpress-deployment.git .
-```
-
-### Change the repo to point at your GIT
-```
-git remote set-url origin git@github.com:yourname/site-deployment-name.git
-```
-
-**don't forget to delete the .git directory or change to your repo**
-
 ## Composer Options
 
 ### Add new themes or plugins via composer
@@ -145,12 +125,18 @@ Either hand edit the require section to add your wanted theme or plugin.
 ```
 "require": {
 		"cweagans/composer-patches": "^1.7",
-		"composer/composer": "*",
+		"composer/composer": "^2.1.8",
 		"composer/installers": "^2.0",
-		"johnpbloch/wordpress": "*",
-		"wpackagist-plugin/akismet":"*",
-		"wpackagist-theme/twentytwenty":"*"	
+		"johnpbloch/wordpress": "^5.8.1",
+		"wpackagist-plugin/akismet":"^4.2.1",
+		"wpackagist-theme/twentytwenty":"^1.8"	
 	}
+```
+
+Or use composer reqire to add the wanted item, for example, add woocommerce.
+
+```
+composer require wpackagist-plugin/woocommerce
 ```
 ### Adaptions to EXTRA
 
@@ -239,7 +225,7 @@ In the ```/files``` directory, there is a number of different .htaccess files. T
 ## Developer/Release tools
 
 ### Generating a .gitignore
-There is a pair of command line tools that will automattically create a .gitignore file for you.  
+There is a pair of command line tools that will automattically create a .gitignore file for you.  This option is auto run with a selection list when you install via create-project.
 
 #### When you are only running themes or plugins that are available on WordPress.org
 This will exclude the entire /wp-content/plugins, /wp-content/themes, /wp-content/uploads, /wp-adming, /wp-includes  directories and the root directory files.

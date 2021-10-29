@@ -67,6 +67,12 @@
         ],
         "post-package-update": [
             "Deployments\\Composer\\WordPress::postPackageUpdate"
-        ]
+        ],
+		"post-create-project-cmd" : [
+			"@postInstall"
+		],
+		"postInstall" : [
+			"npm install; npm run setup"
+		]
     }
 }
