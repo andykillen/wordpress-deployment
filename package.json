@@ -3,10 +3,13 @@
     "version": "1.0.0",
     "description": "Generates the .gitignore",
     "dependencies": {
-        "fs": "*"
+        "child_process": "^1.0.2",
+        "fs": "*",
+        "inquirer": "^8.2.0"
     },
     "scripts": {
         "custom": "node ./scripts/Node/custom.js",
-        "org": "node ./scripts/Node/contrib.js"        
+        "org": "node ./scripts/Node/contrib.js",
+        "setup": "node ./scripts/Node/setup.js"
     }
 }
