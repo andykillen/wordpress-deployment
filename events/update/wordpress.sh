@@ -19,7 +19,6 @@ if [ ! -f "$WORKING_DIRECTORY/robots.txt" ]; then
         cp "$PROJECT_ROOT_DIRECTORY/files/robots.txt" "$WORKING_DIRECTORY/robots.txt"
 fi
 
-
 echo $WORKING_DIRECTORY
 # change to doc root of the server (working directory)
 cd $WORKING_DIRECTORY
